@@ -164,7 +164,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: my-artifact-tfplan
-          path: /tmp
+          path: ${{ env.TFPath }}
 
       - name: Setup Infracost
         uses: infracost/actions/setup@v2
@@ -172,7 +172,7 @@ jobs:
           api-key: ${{ secrets.INFRACOST_API_KEY }}
 
       - name: Generate Infracost JSON
-        run: infracost breakdown --path /tmp/plan.tfplan --format json --usage-file infracost-usage.yml --out-file /tmp/infracost.json
+        run: infracost breakdown --path plan.tfplan --format json --usage-file infracost-usage.yml --out-file /tmp/infracost.json
         
       - name: Archive production artifacts
         id: upload_artifact_2
