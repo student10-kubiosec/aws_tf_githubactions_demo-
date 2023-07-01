@@ -3,10 +3,10 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "remote_state" {
-  bucket = "${var.prefix}-remote-state-${var.environment}"
+  bucket = "${var.prefix}-remote-state-${var.environment}-student10"
   force_destroy = true
   tags = { 
-    Name = "${var.prefix}-remote-state-${var.environment}" 
+    Name = "${var.prefix}-remote-state-${var.environment}-student10" 
     Environment = "${var.environment}"
   } 
 }
