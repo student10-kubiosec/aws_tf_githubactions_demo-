@@ -146,6 +146,10 @@ jobs:
       TF_VAR_secret_key: ${{ secrets.AWS_SECRET_KEY }} #needed for TF
 
     steps:
+      - name: Checkout base branch
+        uses: actions/checkout@v3
+        with:
+          ref: '${{ github.event.pull_request.base.ref }}'
           
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
@@ -156,11 +160,6 @@ jobs:
         id: init
         run: terraform init
         working-directory: ${{ env.TFPath }}
-        
-      - name: Checkout base branch
-        uses: actions/checkout@v3
-        with:
-          ref: '${{ github.event.pull_request.base.ref }}'
 
       - uses: actions/download-artifact@v3
         with:
