@@ -74,20 +74,20 @@ jobs:
           name: my-artifact-scan
           path: trivy-results.txt
           
-  scan2:
-    name: IAC scanning - FortiDevSec
-    runs-on: ubuntu-latest
-    needs: [validate]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-          
-      - name: FortiDevSec 
-        id: FortiDevSec
-        working-directory: ${{ env.TFPath }}
-        run: |
-          docker pull registry.fortidevsec.forticloud.com/fdevsec_sast:latest
-          docker run -i --mount type=bind,source="$(pwd)",target=/scan  registry.fortidevsec.forticloud.com/fdevsec_sast:latest
+# scan2:
+#   name: IAC scanning - FortiDevSec
+#  runs-on: ubuntu-latest
+#    needs: [validate]
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+#          
+#      - name: FortiDevSec 
+#        id: FortiDevSec
+#        working-directory: ${{ env.TFPath }}
+#        run: |
+#          docker pull registry.fortidevsec.forticloud.com/fdevsec_sast:latest
+#          docker run -i --mount type=bind,source="$(pwd)",target=/scan  registry.fortidevsec.forticloud.com/fdevsec_sast:latest
 
 
 
@@ -173,7 +173,6 @@ jobs:
 
       - name: Generate Infracost JSON
         run: infracost breakdown --path /tmp/plan.tfplan --format json --usage-file infracost-usage.yml --out-file /tmp/infracost.json
-        working-directory: ${{ env.TFPath }}
         
       - name: Archive production artifacts
         id: upload_artifact_2
