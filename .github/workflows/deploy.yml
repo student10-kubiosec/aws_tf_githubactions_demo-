@@ -172,7 +172,7 @@ jobs:
           api-key: ${{ secrets.INFRACOST_API_KEY }}
 
       - name: Generate Infracost JSON
-        run: infracost breakdown --path plan.tfplan --format json --usage-file infracost-usage.yml --out-file /tmp/infracost.json
+        run: infracost breakdown --path ${{ env.TFPath }}/plan.tfplan --format json --usage-file infracost-usage.yml --out-file /tmp/infracost.json
         
       - name: Archive production artifacts
         id: upload_artifact_2
